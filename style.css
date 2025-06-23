@@ -1,0 +1,443 @@
+/* --- Base and Theme Variables --- */
+:root {
+    /* Light Theme */
+    --bg-color: #f4f7fa;
+    --card-bg: #ffffff;
+    --text-color: #1a202c;
+    --label-color: #4a5568;
+    --input-bg: #edf2f7;
+    --input-border: #e2e8f0;
+    --input-focus-border: #3b82f6;
+    --primary-btn-bg: #3b82f6;
+    --primary-btn-hover-bg: #2563eb;
+    --badge-pending-bg: #fef3c7;
+    --badge-pending-text: #92400e;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --error-color: #e53e3e;
+    --error-bg-color: #fef2f2;
+    --datepicker-invert: 0;
+    --modal-icon-bg: #d1fae5;
+    --modal-icon-color: #10b981;
+}
+
+html.dark {
+    /* Dark Theme */
+    --bg-color: #1a202c;
+    --card-bg: #2d3748;
+    --text-color: #e2e8f0;
+    --label-color: #a0aec0;
+    --input-bg: #4a5568;
+    --input-border: #718096;
+    --input-focus-border: #63b3ed;
+    --primary-btn-bg: #63b3ed;
+    --primary-btn-hover-bg: #4299e1;
+    --badge-pending-bg: #92400e;
+    --badge-pending-text: #fef3c7;
+    --border-color: #4a5568;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --error-color: #fc8181;
+    --error-bg-color: #4b3434;
+    --datepicker-invert: 1;
+    --modal-icon-bg: #10b98130;
+    --modal-icon-color: #6ee7b7;
+}
+
+/* --- General Body and Layout --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    padding: 0;
+}
+
+#app-container {
+    max-width: 896px; /* Corresponds to max-w-4xl */
+    margin: 0 auto;
+    padding: 2rem; /* p-8 */
+}
+
+/* --- Header --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 25rem; /* Doubled size */
+    height: 15rem; /* Doubled size */
+    margin-right: 0.75rem;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.current-date {
+    font-size: 0.875rem;
+    color: var(--label-color);
+}
+
+/* --- Theme Switcher --- */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.theme-icon {
+    font-size: 0.875rem;
+    color: var(--label-color);
+    margin: 0 0.5rem;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle-input:checked + .toggle-slider {
+    background-color: #3b82f6;
+}
+
+.toggle-input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+
+/* --- Form Card --- */
+.form-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+@media (min-width: 640px) {
+    .form-header {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.leave-balance {
+    font-size: 0.875rem;
+    color: var(--label-color);
+    margin-bottom: 0.5rem;
+}
+
+.balance-amount {
+    font-weight: 600;
+    color: #3b82f6;
+}
+
+html.dark .balance-amount {
+    color: #63b3ed;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status-label {
+    color: var(--label-color);
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+}
+
+.status-badge {
+    background-color: var(--badge-pending-bg);
+    color: var(--badge-pending-text);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+/* --- Form Sections and Grid --- */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* --- Form Elements --- */
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--label-color);
+    margin-bottom: 0.25rem;
+}
+
+.form-input {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
+    border-radius: 0.5rem;
+    padding: 0.625rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box; /* Important for padding and width */
+}
+
+.form-input:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 2px var(--input-focus-border);
+}
+
+.form-input.disabled-input {
+    background-color: #e5e7eb;
+    cursor: not-allowed;
+}
+
+html.dark .form-input.disabled-input {
+    background-color: #374151;
+}
+
+textarea.form-input {
+    resize: vertical;
+}
+
+.input-hint {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--label-color);
+}
+
+.form-input.form-error {
+    border-color: var(--error-color);
+}
+.form-input.form-error:focus {
+    box-shadow: 0 0 0 2px var(--error-color);
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+/* --- Form Errors Container --- */
+.form-errors-container {
+    background-color: var(--error-bg-color);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    list-style-position: inside;
+}
+
+/* Style for individual error items if using a list */
+.form-errors-container li {
+    margin-bottom: 0.25rem;
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(var(--datepicker-invert));
+}
+
+input[type="file"]::file-selector-button {
+    padding: 0.5rem 1rem;
+    background-color: #e5e7eb;
+    color: #374151;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+html.dark input[type="file"]::file-selector-button {
+    background-color: #4b5563;
+    color: #d1d5db;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #d1d5db;
+}
+html.dark input[type="file"]::file-selector-button:hover {
+    background-color: #6b7280;
+}
+
+
+/* --- Submit Button --- */
+.submit-container {
+    text-align: right;
+}
+
+.submit-btn {
+    background-color: var(--primary-btn-bg);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-btn-hover-bg);
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+}
+
+/* --- Success Modal --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+    padding: 2rem;
+    text-align: center;
+    max-width: 384px; /* max-w-sm */
+    width: 100%;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-icon-container {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--modal-icon-bg);
+    border-radius: 9999px;
+    margin: 0 auto 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--modal-icon-color);
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.modal-text {
+    color: var(--label-color);
+    margin-bottom: 1.5rem;
+}
+
+.modal-button {
+    background-color: var(--primary-btn-bg);
+    color: white;
+    font-weight: 700;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
